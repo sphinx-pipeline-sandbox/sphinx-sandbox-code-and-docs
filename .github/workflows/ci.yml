@@ -29,9 +29,7 @@ jobs:
       # 4. Move into the internal documentation directory and run the build script:
       - name: Compile Sphinx Documentation
         run: |
-          cd docs
-          chmod +x build_local.sh
-          ./build_local.sh
+          sphinx-build -b html docs docs/_build/html
 
       # 5. Run validation checks to make sure the code imports and runs without errors:
       - name: Execute Runtime Integrity Checks
