@@ -15,9 +15,10 @@ sphinx-sandbox-code-and-docs/         # Combined repository (unified monorepo).
     │       └── ci.yml                # Flat internal CI pipeline.
     ├── codebase/
     │   └── example.py                # Example Python module with reST docstrings.
-    └── docs/
-        ├── conf.py                   # Sphinx path configuration matrix.
-        └── index.rst                 # Documentation index layout file.
+    ├── docs/
+    |   ├── conf.py                   # Sphinx path configuration matrix.
+    |   └── index.rst                 # Documentation index layout file.
+    └── .gitignore                    # Defensive tracking shield (ignores build artifacts).
 ```
 ## Features
 * **Atomic Continuous Integration:** Every single commit is automatically validated by an internal GitHub Actions runner that tests the code syntax and docstring compilation simultaneously.
