@@ -1,0 +1,40 @@
+name: Continuous Integration - Remote Docs Compilation - Combined Repo
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. A single checkout pulls BOTH the code and the docs instantly:
+      - name: Checkout Integrated Repository
+        uses: actions/checkout@v4
+
+      # 2. Provision a clean, predictable Python execution-environment:
+      - name: Set up Python Environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3. Upgrade package managers and fetch necessary documentation engines:
+      - name: Install Sphinx Engine Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install sphinx sphinx-rtd-theme
+
+      # 4. Move into the internal documentation directory and run the build script:
+      - name: Compile Sphinx Documentation
+        run: |
+          cd docs
+          chmod +x build_local.sh
+          ./build_local.sh
+
+      # 5. Run validation checks to make sure the code imports and runs without errors:
+      - name: Execute Runtime Integrity Checks
+        run: |
+          python -c "from codebase.example import Circle; c = Circle(5); assert c.get_area() > 0"
+          echo "All structural runtime-checks passed successfully!"
