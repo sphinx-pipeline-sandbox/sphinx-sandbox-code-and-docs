@@ -2,9 +2,9 @@ name: Continuous Integration - Remote Docs Compilation - Combined Repo
 
 on:
   push:
-    branches: [ master, main ]
+    branches: [ master ]
   pull_request:
-    branches: [ master, main ]
+    branches: [ master ]
 
 jobs:
   build-docs:
